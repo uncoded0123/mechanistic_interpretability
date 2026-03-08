@@ -1,0 +1,36 @@
+# Model weights
+*.pt
+*.pth
+*.bin
+*.safetensors
+*.ckpt
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Python
+__pycache__/
+*.pyc
+
+# SAE/HuggingFace caches
+.cache/
+huggingface/
+
+# Environment/secrets
+.env
+.env.*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Data
+*.csv
+*.parquet
+*.h5
+*.hdf5
+
+# Logs
+*.log
+wandb/
+runs/
