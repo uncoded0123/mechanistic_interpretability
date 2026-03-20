@@ -30,6 +30,7 @@ Thumbs.db
 *.h5
 *.hdf5
 MNIST/
+input.txt
 
 # Logs
 *.log

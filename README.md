@@ -1,52 +1,29 @@
 # Mechanistic Interpretability
 
-Hands-on mechanistic interpretability experiments on GPT-2 small (124M params). All library abstractions stripped down to raw tensor operations.
+Hands-on mechanistic interpretability experiments. Built on an 8GB laptop.
 
 ## Projects
 
-### GPT-2 SAE Circuit Tracing — [`gpt2/gpt2_mech_interp.ipynb`](gpt2/gpt2_mech_interp.ipynb)
+### MNIST From Scratch — [`MNIST From Scratch.ipynb`](MNIST%20From%20Scratch.ipynb)
 
-Sparse autoencoder analysis and circuit tracing on GPT-2 small, running locally on CPU.
+3-layer neural network with manual forward and backward pass. No `loss.backward()`, no `optim.step()`. 97.94% accuracy in under 2 minutes on CPU.
 
-**What's in it:**
-- Load SAE as 4 raw tensors (W_enc, b_enc, W_dec, b_dec) — no library encode/decode calls
-- SAE encode from first principles: `features = ReLU((x - b_dec) @ W_enc + b_enc)`
-- Feature identification: find which SAE features correspond to a concept (e.g. "Golden Gate Bridge")
-- Feature verification: probe what concept a given feature represents across diverse prompts
-- Steering: add scaled SAE decoder directions to GPT-2's residual stream to shift model output
-- **Circuit tracing via ablation**: zero out individual attention heads and MLP layers, measure downstream effect on SAE feature activation
+### Raw GPT-2 + Steering — [`gpt2/raw_gpt2_with_mech_interp.ipynb`](gpt2/raw_gpt2_with_mech_interp.ipynb)
 
-**Key findings:**
+GPT-2 small forward pass from raw weight tensors (attention, MLP, layer norm — no library calls). Includes difference-in-means steering to shift output toward Golden Gate Bridge / San Francisco concepts.
 
-**1. Unigram circuit (Cell 10)** — SAE feature 10261 (" Golden") is 85% driven by MLP layer 0. No attention heads contribute. It's a token-identity feature computed directly from the embedding.
+### Pretrained SAE Steering — [`gpt2/gpt2_mech_interp.ipynb`](gpt2/gpt2_mech_interp.ipynb)
 
-| Component | Δ SAE activation | Role |
-|-----------|-----------------|------|
-| L0 MLP | -62.97 | Primary driver |
-| L7 MLP | -14.90 | Secondary refinement |
-| All attention heads | 0.00 | No contribution |
+Golden Gate Bridge steering using a pretrained sparse autoencoder (24,576 features) via TransformerLens + sae_lens. Identifies feature 23937 and injects its decoder direction into GPT-2's residual stream.
 
-**2. Contextual circuit (Cell 11)** — IOI task: "John and Mary went to the store. John gave a drink to" → model predicts "Mary". Ablation reveals attention heads that move name information across positions.
+### Minimal Transformer — [`minimal_transformer/`](minimal_transformer/)
 
-| Component | Δ logit("Mary") | Role |
-|-----------|----------------|------|
-| L0 MLP | -4.30 | Token processing |
-| L10 MLP | -2.19 | Late refinement |
-| L11 Attn H0 | -1.90 | Name mover head |
-| L0 Attn H11 | +1.57 | Negative/inhibition head |
-| L11 Attn H10 | +1.39 | Backup negative head |
-| L5 Attn H9 | -0.96 | S-inhibition head |
-
-The contrast shows two types of circuits: MLP-only (unigram features driven by token identity) vs attention-mediated (contextual features requiring cross-position information flow).
-
-### Minimal Transformer — [`minimal_transformer/minimal_transformer.ipynb`](minimal_transformer/minimal_transformer.ipynb)
-
-Character-level transformer trained from scratch on Shakespeare. Includes custom SAE training and steering.
+Character-level transformer trained from scratch on Shakespeare. Includes attention heatmaps, SAE training, and steering.
 
 ## Setup
 
 ```bash
-pip install transformer_lens sae_lens transformers torch
+pip install transformer_lens sae_lens transformers torch torchvision tiktoken
 ```
 
-Runs on CPU (8GB+ RAM). No GPU required for inference.
+Runs on CPU (8GB+ RAM). GPU optional.
