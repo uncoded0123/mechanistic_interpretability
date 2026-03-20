@@ -1,6 +1,6 @@
 # Mechanistic Interpretability
 
-Hands-on mechanistic interpretability experiments. Built on an 8GB laptop.
+Hands-on mechanistic interpretability experiments.
 
 ## Projects
 
@@ -10,7 +10,7 @@ Hands-on mechanistic interpretability experiments. Built on an 8GB laptop.
 
 ### Raw GPT-2 + Steering — [`gpt2/raw_gpt2_with_mech_interp.ipynb`](gpt2/raw_gpt2_with_mech_interp.ipynb)
 
-GPT-2 small forward pass from raw weight tensors (attention, MLP, layer norm — no library calls). Includes difference-in-means steering to shift output toward Golden Gate Bridge / San Francisco concepts.
+GPT-2 small forward pass from raw weight tensors — attention, MLP, and layer norm implemented manually. Includes difference-in-means steering to shift output toward Golden Gate Bridge / San Francisco concepts.
 
 ### Pretrained SAE Steering — [`gpt2/gpt2_mech_interp.ipynb`](gpt2/gpt2_mech_interp.ipynb)
 
@@ -26,4 +26,4 @@ Character-level transformer trained from scratch on Shakespeare. Includes attent
 pip install transformer_lens sae_lens transformers torch torchvision tiktoken
 ```
 
-Runs on CPU (8GB+ RAM). GPU optional.
+MNIST, raw GPT-2, and minimal transformer run on CPU (8GB+ RAM). Pretrained SAE steering and heatmap notebooks require GPU (Colab T4 works).
