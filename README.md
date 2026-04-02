@@ -12,10 +12,6 @@ Hands-on mechanistic interpretability experiments.
 
 GPT-2 small forward pass from raw weight tensors — attention, MLP, and layer norm implemented manually. Includes difference-in-means steering to shift output toward Golden Gate Bridge / San Francisco concepts.
 
-### Pretrained SAE Steering — [`gpt2/gpt2_mech_interp.ipynb`](gpt2/gpt2_mech_interp.ipynb)
-
-Golden Gate Bridge steering using a pretrained sparse autoencoder (24,576 features) via TransformerLens + sae_lens. Identifies feature 23937 and injects its decoder direction into GPT-2's residual stream.
-
 ### Minimal Transformer — [`minimal_transformer/`](minimal_transformer/)
 
 Character-level transformer trained from scratch on Shakespeare. Includes attention heatmaps, SAE training, and steering.
