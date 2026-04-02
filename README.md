@@ -19,7 +19,7 @@ Character-level transformer trained from scratch on Shakespeare. Includes attent
 ## Setup
 
 ```bash
-pip install transformer_lens sae_lens transformers torch torchvision tiktoken
+pip install transformers torch torchvision tiktoken
 ```
 
-MNIST, raw GPT-2, and minimal transformer run on CPU (8GB+ RAM). Pretrained SAE steering and heatmap notebooks require GPU (Colab T4 works).
+MNIST runs on CPU (8GB+ RAM). Raw GPT-2 and minimal transformer notebooks run faster on GPU (Colab T4 works).
