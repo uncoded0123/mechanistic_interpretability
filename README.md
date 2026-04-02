@@ -6,7 +6,7 @@ Hands-on mechanistic interpretability experiments.
 
 ### MNIST From Scratch — [`MNIST From Scratch.ipynb`](MNIST%20From%20Scratch.ipynb)
 
-3-layer neural network with manual forward and backward pass. No `loss.backward()`, no `optim.step()`. 97.94% accuracy in under 2 minutes on CPU.
+2-hidden-layer neural network with manual forward and backward pass. No `loss.backward()`, no `optim.step()`. 97.94% accuracy in under 2 minutes on CPU.
 
 ### Raw GPT-2 + Steering — [`gpt2/raw_gpt2_with_mech_interp.ipynb`](gpt2/raw_gpt2_with_mech_interp.ipynb)
 
