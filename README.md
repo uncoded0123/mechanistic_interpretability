@@ -13,6 +13,7 @@ Hands-on mechanistic interpretability experiments.
 GPT-2 small forward pass from raw weight tensors — attention, MLP, and layer norm implemented manually. Includes difference-in-means steering to shift output toward Golden Gate Bridge / San Francisco concepts.
 
 No steer: "the beach. It was a beautiful place..."
+
 Steered:  "the San Francisco Bay Bridge in the early 1970s..."
 
 ### Minimal Transformer — [`minimal_transformer/`](minimal_transformer/)
